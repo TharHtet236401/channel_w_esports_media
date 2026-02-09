@@ -1,0 +1,30 @@
+# Python-generated files
+__pycache__/
+*.py[oc]
+build/
+dist/
+wheels/
+*.egg-info
+
+# Virtual environments
+.venv
+
+# Environment variables
+.env
+.env.local
+.env.production
+
+#Logs
+logs/
+
+#node modules
+node_modules/
+
+#static files
+static/css/output.css
+
+#Media files (Attachments)
+media/
+
+#Credentials
+credentials/
