@@ -1,20 +1,69 @@
 {% extends 'base.html' %}
-{% block title %}Posts{% endblock %}
+{% block title %}News &amp; Blog — Channel W{% endblock %}
+
 {% block content %}
-
-<div class="card bg-base-100 w-96 shadow-sm">
-    <figure>
-      <img
-        src="https://img.daisyui.com/images/stock/photo-1606107557195-0e29a4b5b4aa.webp"
-        alt="Shoes" />
-    </figure>
-    <div class="card-body">
-      <h2 class="card-title">Card Title</h2>
-      <p>A card component has a figure, a body part, and inside body there are title and actions parts</p>
-      <div class="card-actions justify-end">
-        <button class="btn btn-primary">Buy Now</button>
-      </div>
+<section class="bg-base-200/50 border-b border-base-300/40">
+    <div class="container mx-auto px-4 py-12 md:py-16">
+        <div class="max-w-3xl">
+            <p class="text-primary font-semibold text-sm uppercase tracking-[0.2em] mb-2">Blog</p>
+            <h1 class="text-3xl md:text-4xl font-extrabold tracking-tight text-base-content">
+                News &amp; Updates
+            </h1>
+            <p class="text-base-content/70 mt-2 text-lg">
+                Latest from the world of esports, tournaments, and Channel W.
+            </p>
+        </div>
     </div>
-  </div>
+</section>
 
+<section class="container mx-auto px-4 py-10 md:py-14">
+    {% if posts %}
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        {% for post in posts %}
+        <article class="card bg-base-100 shadow-md hover:shadow-xl transition-shadow duration-300 overflow-hidden border border-base-300/40 rounded-2xl">
+            <!-- Dummy image (replace with post.image when field exists) -->
+            <figure class="aspect-video w-full bg-base-300/50 overflow-hidden">
+                <img
+                    src="https://images.unsplash.com/photo-1542751371-adc38448a05e?w=600&h=340&fit=crop"
+                    alt=""
+                    class="w-full h-full object-cover"
+                    loading="lazy"
+                />
+            </figure>
+            <div class="card-body gap-3 p-5 md:p-6">
+                <p class="text-xs text-base-content/60 uppercase tracking-wide">
+                    {{ post.created_at|date:"F j, Y" }}
+                </p>
+                <h2 class="card-title text-lg md:text-xl font-bold leading-tight line-clamp-2">
+                    {{ post.caption }}
+                </h2>
+                <p class="text-base-content/70 text-sm line-clamp-3">
+                    {{ post.description|truncatewords:24 }}
+                </p>
+                <div class="card-actions justify-end pt-2">
+                    <a href="#" class="btn btn-primary btn-sm rounded-full gap-2">
+                        Read more
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                        </svg>
+                    </a>
+                </div>
+            </div>
+        </article>
+        {% endfor %}
+    </div>
+    {% else %}
+    <div class="flex flex-col items-center justify-center py-20 text-center">
+        <div class="w-20 h-20 rounded-2xl bg-base-300/50 flex items-center justify-center mb-4">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10 text-base-content/40" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M19 20H5a2 2 0 01-2-2V6a2 2 0 012-2h10a2 2 0 012 2v1m2 13a2 2 0 01-2-2V7m2 13a2 2 0 002-2V9a2 2 0 00-2-2h-2m-4-3H9M7 16h6M7 8h6m4-4h-1m-1 4h-1m-1-4h-1m-1 4h-1" />
+            </svg>
+        </div>
+        <h2 class="text-xl font-bold text-base-content mb-2">No posts yet</h2>
+        <p class="text-base-content/60 max-w-sm">
+            Check back soon for news, tournament coverage, and updates from Channel W.
+        </p>
+    </div>
+    {% endif %}
+</section>
 {% endblock %}
