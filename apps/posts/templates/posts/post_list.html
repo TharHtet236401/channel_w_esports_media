@@ -63,6 +63,36 @@
         </article>
         {% endfor %}
     </div>
+
+    {% if page_obj and page_obj.paginator.num_pages > 1 %}
+    <nav class="flex justify-center mt-12" aria-label="Blog pagination">
+        <ul class="join">
+            {% if page_obj.has_previous %}
+            <li>
+                <a href="?page={{ page_obj.previous_page_number }}" class="join-item btn btn-sm">Previous</a>
+            </li>
+            {% endif %}
+            {% for num in page_obj.paginator.page_range %}
+            <li>
+                {% if num == page_obj.number %}
+                <span class="join-item btn btn-sm btn-active">{{ num }}</span>
+                {% else %}
+                <a href="?page={{ num }}" class="join-item btn btn-sm">{{ num }}</a>
+                {% endif %}
+            </li>
+            {% endfor %}
+            {% if page_obj.has_next %}
+            <li>
+                <a href="?page={{ page_obj.next_page_number }}" class="join-item btn btn-sm">Next</a>
+            </li>
+            {% endif %}
+        </ul>
+    </nav>
+    <p class="text-center text-sm text-base-content/60 mt-4">
+        Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}
+    </p>
+    {% endif %}
+
     {% else %}
     <div class="flex flex-col items-center justify-center py-20 text-center">
         <div class="w-20 h-20 rounded-2xl bg-base-300/50 flex items-center justify-center mb-4">
