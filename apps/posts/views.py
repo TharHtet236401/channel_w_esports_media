@@ -1,8 +1,8 @@
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 
 from .selectors import get_posts
-
+from .models import Post
 
 def post_list(request):
     try:
@@ -26,3 +26,10 @@ def post_list(request):
             "posts/post_list.html",
             {"posts": [], "page_obj": None, "error": str(e)},
         )
+
+def single_post(request, post_id):
+    try:
+        post = get_object_or_404(Post.objects.prefetch_related("region"), id=post_id)
+        return render(request, "posts/single_post.html", {"post": post})
+    except Exception as e:
+        return render(request, "posts/single_post.html", {"post": None, "error": str(e)})

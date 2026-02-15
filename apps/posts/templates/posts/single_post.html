@@ -1,0 +1,67 @@
+{% extends 'base.html' %}
+
+{% block title %}{% if post %}{{ post.caption }} — Channel W{% else %}Post — Channel W{% endif %}{% endblock %}
+
+{% block content %}
+{% if post %}
+<article class="container mx-auto px-4 py-10 md:py-14 max-w-4xl">
+    <!-- Back link -->
+    <a href="{% url 'post_list' %}" class="inline-flex items-center gap-2 text-sm text-base-content/70 hover:text-primary mb-8">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16l-4-4m0 0l4-4m-4 4h18" />
+        </svg>
+        Back to News
+    </a>
+
+    <!-- Meta -->
+    <div class="flex flex-wrap items-center gap-3 mb-4">
+        <time class="text-sm text-base-content/60 uppercase tracking-wide" datetime="{{ post.created_at|date:'c' }}">
+            {{ post.created_at|date:"F j, Y" }}
+        </time>
+        {% if post.region.all %}
+        <div class="flex flex-wrap gap-1.5">
+            {% for region in post.region.all %}
+            <span class="badge badge-primary badge-sm uppercase text-[10px] tracking-wide px-2 py-0.5">
+                {{ region.name }}
+            </span>
+            {% endfor %}
+        </div>
+        {% endif %}
+    </div>
+
+    <!-- Title -->
+    <h1 class="text-3xl md:text-4xl font-extrabold tracking-tight text-base-content mb-6">
+        {{ post.caption }}
+    </h1>
+
+    <!-- Dummy hero image -->
+    <figure class="aspect-video w-full rounded-2xl overflow-hidden bg-base-300/50 mb-8">
+        <img
+            src="https://images.unsplash.com/photo-1542751371-adc38448a05e?w=1200&h=630&fit=crop"
+            alt=""
+            class="w-full h-full object-cover"
+        />
+    </figure>
+
+    <!-- Body -->
+    <div class="prose prose-lg max-w-none text-base-content/90">
+        {{ post.description|linebreaks }}
+    </div>
+
+    <!-- CTA back to list -->
+    <div class="mt-12 pt-8 border-t border-base-300/60">
+        <a href="{% url 'post_list' %}" class="btn btn-primary rounded-full gap-2">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16l-4-4m0 0l4-4m-4 4h18" />
+            </svg>
+            All News &amp; Updates
+        </a>
+    </div>
+</article>
+{% else %}
+<div class="container mx-auto px-4 py-20 text-center">
+    <p class="text-base-content/70 mb-4">{% if error %}{{ error }}{% else %}Post not found.{% endif %}</p>
+    <a href="{% url 'post_list' %}" class="btn btn-primary">Back to News</a>
+</div>
+{% endif %}
+{% endblock %}
