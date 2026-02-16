@@ -17,6 +17,19 @@
 </section>
 
 <section class="container mx-auto px-4 py-10 md:py-14">
+    <!-- Region filter -->
+    <div class="flex flex-wrap items-center gap-2 mb-8">
+        <span class="text-sm font-medium text-base-content/70 uppercase tracking-wide mr-1">Filter by region:</span>
+        <a href="{% url 'post_list' %}" class="btn btn-sm {% if not current_region %}btn-primary{% else %}btn-ghost{% endif %} rounded-full">
+            All
+        </a>
+        {% for region in regions %}
+        <a href="?region={{ region.name|urlencode }}" class="btn btn-sm {% if current_region == region.name %}btn-primary{% else %}btn-ghost{% endif %} rounded-full">
+            {{ region.name }}
+        </a>
+        {% endfor %}
+    </div>
+
     {% if posts %}
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
         {% for post in posts %}
@@ -69,7 +82,7 @@
         <ul class="join">
             {% if page_obj.has_previous %}
             <li>
-                <a href="?page={{ page_obj.previous_page_number }}" class="join-item btn btn-sm">Previous</a>
+                <a href="?page={{ page_obj.previous_page_number }}{% if current_region %}&region={{ current_region|urlencode }}{% endif %}" class="join-item btn btn-sm">Previous</a>
             </li>
             {% endif %}
             {% for num in page_obj.paginator.page_range %}
@@ -77,13 +90,13 @@
                 {% if num == page_obj.number %}
                 <span class="join-item btn btn-sm btn-active">{{ num }}</span>
                 {% else %}
-                <a href="?page={{ num }}" class="join-item btn btn-sm">{{ num }}</a>
+                <a href="?page={{ num }}{% if current_region %}&region={{ current_region|urlencode }}{% endif %}" class="join-item btn btn-sm">{{ num }}</a>
                 {% endif %}
             </li>
             {% endfor %}
             {% if page_obj.has_next %}
             <li>
-                <a href="?page={{ page_obj.next_page_number }}" class="join-item btn btn-sm">Next</a>
+                <a href="?page={{ page_obj.next_page_number }}{% if current_region %}&region={{ current_region|urlencode }}{% endif %}" class="join-item btn btn-sm">Next</a>
             </li>
             {% endif %}
         </ul>

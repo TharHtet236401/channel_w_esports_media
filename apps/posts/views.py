@@ -1,12 +1,13 @@
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.shortcuts import render, get_object_or_404
 
+from .models import Post, Region
 from .selectors import get_posts
-from .models import Post
 
 def post_list(request):
     try:
-        post_list_qs = get_posts()
+        region_name = request.GET.get("region", "").strip() or None
+        post_list_qs = get_posts(region_name=region_name)
         paginator = Paginator(post_list_qs, 9)
         page_number = request.GET.get("page", 1)
         try:
@@ -15,16 +16,28 @@ def post_list(request):
             page_obj = paginator.page(1)
         except EmptyPage:
             page_obj = paginator.page(paginator.num_pages)
+        regions = Region.objects.all().order_by("name")
         return render(
             request,
             "posts/post_list.html",
-            {"posts": page_obj.object_list, "page_obj": page_obj},
+            {
+                "posts": page_obj.object_list,
+                "page_obj": page_obj,
+                "regions": regions,
+                "current_region": region_name,
+            },
         )
     except Exception as e:
         return render(
             request,
             "posts/post_list.html",
-            {"posts": [], "page_obj": None, "error": str(e)},
+            {
+                "posts": [],
+                "page_obj": None,
+                "regions": [],
+                "current_region": None,
+                "error": str(e),
+            },
         )
 
 def single_post(request, post_id):
