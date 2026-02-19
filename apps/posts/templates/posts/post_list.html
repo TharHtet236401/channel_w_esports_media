@@ -17,9 +17,9 @@
 </section>
 
 <section class="container mx-auto px-4 py-10 md:py-14">
-    <!-- Region filter -->
-    <div class="flex flex-wrap items-center gap-2 mb-8">
-        <span class="text-sm font-medium text-base-content/70 uppercase tracking-wide mr-1">Filter by region:</span>
+    <!-- Region filter (right-aligned) -->
+    <div class="flex flex-wrap items-center justify-end gap-2 mb-8">
+        <span class="text-sm font-medium text-base-content/70 uppercase tracking-wide">Filter by region:</span>
         <a href="{% url 'post_list' %}" class="btn btn-sm {% if not current_region %}btn-primary{% else %}btn-ghost{% endif %} rounded-full">
             All
         </a>

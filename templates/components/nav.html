@@ -16,7 +16,7 @@
         </div>
 
         <!-- Center: Desktop Nav -->
-        <div class="hidden lg:flex flex-1 justify-center">
+        <div class="hidden lg:flex flex-1 justify-end">
             <ul class="menu menu-horizontal px-1 gap-1 text-sm font-medium">
                 <li>
                     <a href="#" class="uppercase tracking-wide">
@@ -46,51 +46,5 @@
             </ul>
         </div>
 
-        <!-- Right: Actions -->
-        <div class="flex items-center gap-2 flex-none">
-            <!-- Theme toggle (dummy) -->
-            <label class="swap swap-rotate mr-1 hidden md:inline-flex">
-                <!-- this hidden checkbox controls the state -->
-                <input type="checkbox" class="theme-controller" value="dark" />
-
-                <!-- sun icon -->
-                <svg class="swap-off fill-current w-5 h-5 text-warning" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-                    <path d="M5.64 4.22 4.22 5.64 5.64 4.22zM1 13h3v-2H1v2zm10-9h2V1h-2v3zm7.36 1.64 1.41-1.41-1.41 1.41zM18 13h3v-2h-3v2zm-7 8h2v-3h-2v3zM4.22 18.36 5.64 19.78 4.22 18.36zM12 7a5 5 0 1 0 0 10 5 5 0 0 0 0-10zm6.36 11.36 1.41-1.41-1.41 1.41z" />
-                </svg>
-
-                <!-- moon icon -->
-                <svg class="swap-on fill-current w-5 h-5 text-info" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-                    <path d="M21.64 13a1 1 0 0 0-1.05-.14 7 7 0 0 1-9.45-7.77 1 1 0 0 0-1.36-1.09A9 9 0 1 0 22 14.05a1 1 0 0 0-.36-1.05z" />
-                </svg>
-            </label>
-
-            <!-- Call to action -->
-            <a href="#" class="btn btn-primary btn-sm rounded-full px-4 hidden md:inline-flex">
-                <span class="uppercase tracking-wide text-xs">Join the League</span>
-            </a>
-
-            <!-- Mobile menu -->
-            <div class="flex lg:hidden">
-                <div class="dropdown dropdown-end">
-                    <label tabindex="0" class="btn btn-ghost btn-square" aria-label="Open menu">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
-                        </svg>
-                    </label>
-                    <ul tabindex="0" class="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52">
-                        <li><a href="#">Overview</a></li>
-                        <li><a href="#">Tournaments</a></li>
-                        <li><a href="#">Teams</a></li>
-                        <li><a href="#">Schedule</a></li>
-                        <li><a href="#">News</a></li>
-                        <li class="mt-1">
-                            <a href="#" class="btn btn-primary btn-sm w-full justify-center">
-                                Join the League
-                            </a>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </div>
     </div>
 </nav>
