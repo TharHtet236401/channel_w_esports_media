@@ -17,28 +17,30 @@ def post_list(request):
         except EmptyPage:
             page_obj = paginator.page(paginator.num_pages)
         regions = Region.objects.all().order_by("name")
-        return render(
-            request,
-            "posts/post_list.html",
-            {
-                "posts": page_obj.object_list,
-                "page_obj": page_obj,
-                "regions": regions,
-                "current_region": region_name,
-            },
-        )
+        context = {
+            "posts": page_obj.object_list,
+            "page_obj": page_obj,
+            "regions": regions,
+            "current_region": region_name,
+        }
+        if request.headers.get("HX-Request"):
+            return render(
+                request,
+                "posts/partials/post_list_content.html",
+                context,
+            )
+        return render(request, "posts/post_list.html", context)
     except Exception as e:
-        return render(
-            request,
-            "posts/post_list.html",
-            {
-                "posts": [],
-                "page_obj": None,
-                "regions": [],
-                "current_region": None,
-                "error": str(e),
-            },
-        )
+        context = {
+            "posts": [],
+            "page_obj": None,
+            "regions": [],
+            "current_region": None,
+            "error": str(e),
+        }
+        if request.headers.get("HX-Request"):
+            return render(request, "posts/partials/post_list_content.html", context)
+        return render(request, "posts/post_list.html", context)
 
 def single_post(request, post_id):
     try:
