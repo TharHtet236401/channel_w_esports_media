@@ -3,6 +3,7 @@
 {% block title %}About Us — Channel W{% endblock %}
 
 {% block content %}
+{% load static %}
 <section class="bg-base-200/50 border-b border-base-300/40">
     <div class="container mx-auto px-4 py-12 md:py-16">
         <div class="max-w-3xl">
@@ -18,16 +19,10 @@
 </section>
 
 <section class="container mx-auto px-4 py-10 md:py-14">
-    <div class="max-w-4xl mx-auto">
-        <div class="flex flex-col md:flex-row gap-10 items-start">
-            <!-- Profile card -->
-            <div class="flex-shrink-0">
-                <div class="w-48 h-48 rounded-2xl bg-gradient-to-tr from-primary to-secondary flex items-center justify-center shadow-xl">
-                    <span class="text-base-100 font-black text-6xl tracking-tight">W</span>
-                </div>
-            </div>
-
-            <div class="flex-1">
+    <div class="max-w-4xl mx-auto ">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-10 items-start">
+            <!-- Info on left -->
+            <div>
                 <h2 class="text-2xl font-bold text-base-content mb-2">
                     Wai <span class="text-primary">"Wai Wai"</span> Yan Linn
                 </h2>
@@ -71,6 +66,14 @@
                     </p>
                 </div>
             </div>
+
+            <!-- Photo on right -->
+            <div class="flex justify-center md:justify-end">
+                <div class="w-48 h-48 rounded-2xl flex items-center justify-center shadow-xl overflow-hidden">
+                    <img src="{% static 'images/ko_wai.png' %}" class="object-cover w-full h-full" width="100" height="100" alt="Wai Wai profile photo">
+                </div>
+            </div>
+            
         </div>
     </div>
 </section>
