@@ -1,9 +1,10 @@
+{% load static %}
 <nav class="navbar bg-base-100/95 border-b border-base-300/60 backdrop-blur sticky top-0 z-30">
     <div class="container mx-auto px-4 flex flex-wrap items-center justify-between gap-4 w-full">
         <!-- Left: Brand -->
         <div class="flex items-center gap-3 flex-1">
             <div class="h-9 w-9 rounded-xl bg-gradient-to-tr from-primary to-secondary flex items-center justify-center shadow-lg shadow-primary/40">
-                <span class="text-base-100 font-black text-lg tracking-tight">W</span>
+                <img src="{% static 'images/logo.jpg' %}" class="w-full h-full object-cover rounded-2xl" width="192" height="192">
             </div>
             <div class="leading-tight">
                 <a href="#" class="text-lg md:text-xl font-extrabold tracking-tight uppercase">
