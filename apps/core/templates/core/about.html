@@ -1,0 +1,77 @@
+{% extends 'base.html' %}
+
+{% block title %}About Us — Channel W{% endblock %}
+
+{% block content %}
+<section class="bg-base-200/50 border-b border-base-300/40">
+    <div class="container mx-auto px-4 py-12 md:py-16">
+        <div class="max-w-3xl">
+            <p class="text-primary font-semibold text-sm uppercase tracking-[0.2em] mb-2">About Us</p>
+            <h1 class="text-3xl md:text-4xl font-extrabold tracking-tight text-base-content">
+                Meet the Founder
+            </h1>
+            <p class="text-base-content/70 mt-2 text-lg">
+                Channel W is built by an esports professional with deep roots in the Mobile Legends community.
+            </p>
+        </div>
+    </div>
+</section>
+
+<section class="container mx-auto px-4 py-10 md:py-14">
+    <div class="max-w-4xl mx-auto">
+        <div class="flex flex-col md:flex-row gap-10 items-start">
+            <!-- Profile card -->
+            <div class="flex-shrink-0">
+                <div class="w-48 h-48 rounded-2xl bg-gradient-to-tr from-primary to-secondary flex items-center justify-center shadow-xl">
+                    <span class="text-base-100 font-black text-6xl tracking-tight">W</span>
+                </div>
+            </div>
+
+            <div class="flex-1">
+                <h2 class="text-2xl font-bold text-base-content mb-2">
+                    Wai <span class="text-primary">"Wai Wai"</span> Yan Linn
+                </h2>
+                <p class="text-base-content/60 mb-4 font-medium">ဝေယံလင်း</p>
+
+                <dl class="space-y-2 text-sm mb-6">
+                    <div class="flex gap-3">
+                        <dt class="text-base-content/60 w-24">Nationality</dt>
+                        <dd class="font-medium">Myanmar</dd>
+                    </div>
+                    <div class="flex gap-3">
+                        <dt class="text-base-content/60 w-24">Role</dt>
+                        <dd class="font-medium">Caster &amp; Commentator</dd>
+                    </div>
+                    <div class="flex gap-3">
+                        <dt class="text-base-content/60 w-24">Status</dt>
+                        <dd class="font-medium">Active</dd>
+                    </div>
+                </dl>
+
+                <div class="prose prose-base text-base-content/80 max-w-none">
+                    <p class="mb-4">
+                        Wai Yan Linn, known professionally as <strong>Wai Wai</strong>, is a Burmese caster and commentator 
+                        with years of experience in the Mobile Legends: Bang Bang esports scene.
+                    </p>
+                    <p class="mb-4">
+                        He has cast at major international events including the <strong>M7 World Championship</strong> (2026), 
+                        <strong>M6 World Championship</strong> (2024), <strong>M4 World Championship</strong> (2023), 
+                        and <strong>M1 World Championship</strong> (2019), as well as the MLBB Mid Season Cups and 
+                        Snapdragon Pro Series APAC Finals.
+                    </p>
+                    <p>
+                        Channel W was founded to bring his passion for esports and regional coverage to fans across 
+                        Southeast Asia and beyond—covering news, tournaments, and the people behind the scenes.
+                    </p>
+                </div>
+
+                <div class="mt-8 pt-6 border-t border-base-300/60">
+                    <p class="text-sm text-base-content/60">
+                        Source: <a href="https://liquipedia.net/mobilelegends/Wai_Wai" target="_blank" rel="noopener noreferrer" class="link link-primary">Liquipedia Mobile Legends – Wai Wai</a>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

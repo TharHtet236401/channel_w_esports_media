@@ -1,6 +1,12 @@
 from django.shortcuts import render
 
-# Create your views here.
 
 def home(request):
-    return render(request, 'core/home.html')
+    return render(request, "core/home.html")
+
+
+def about(request):
+    try:
+        return render(request, "core/about.html")
+    except Exception as e:
+        return render(request, "core/about.html", {"error": str(e)})
