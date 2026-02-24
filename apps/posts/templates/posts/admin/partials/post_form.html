@@ -1,0 +1,61 @@
+{% load static %}
+{% if error %}
+<div class="alert alert-error mb-4">
+    <span>{{ error }}</span>
+</div>
+{% endif %}
+
+<h2 class="font-semibold text-base md:text-lg mb-3">
+    {% if post %}Edit Post{% else %}New Post{% endif %}
+</h2>
+
+<form
+    method="post"
+    hx-post="{{ form_action|default:request.path }}"
+    hx-target="#post-table"
+    hx-swap="outerHTML"
+>
+    {% csrf_token %}
+
+    <div class="form-control mb-3">
+        <label class="label">
+            <span class="label-text">Caption</span>
+        </label>
+        {{ form.caption }}
+        {% if form.caption.errors %}
+        <p class="text-error text-xs mt-1">{{ form.caption.errors.0 }}</p>
+        {% endif %}
+    </div>
+
+    <div class="form-control mb-3">
+        <label class="label">
+            <span class="label-text">Description</span>
+        </label>
+        {{ form.description }}
+        {% if form.description.errors %}
+        <p class="text-error text-xs mt-1">{{ form.description.errors.0 }}</p>
+        {% endif %}
+    </div>
+
+    <div class="form-control mb-4">
+        <label class="label">
+            <span class="label-text">Regions</span>
+        </label>
+        <div class="space-y-1">
+            {{ form.region }}
+        </div>
+        {% if form.region.errors %}
+        <p class="text-error text-xs mt-1">{{ form.region.errors.0 }}</p>
+        {% endif %}
+    </div>
+
+    <div class="flex items-center justify-between gap-2 mt-4">
+        <button type="submit" class="btn btn-primary btn-sm">
+            {% if post %}Update{% else %}Create{% endif %} Post
+        </button>
+        <form method="dialog">
+            <button class="btn btn-ghost btn-sm">Cancel</button>
+        </form>
+    </div>
+</form>
+
