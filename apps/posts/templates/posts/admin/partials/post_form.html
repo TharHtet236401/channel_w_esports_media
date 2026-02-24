@@ -5,21 +5,39 @@
 </div>
 {% endif %}
 
-<h2 class="font-semibold text-base md:text-lg mb-3">
-    {% if post %}Edit Post{% else %}New Post{% endif %}
-</h2>
+<div class="flex items-center justify-between mb-2">
+    <div>
+        <h2 class="font-semibold text-base md:text-lg">
+            {% if post %}Edit Post{% else %}New Post{% endif %}
+        </h2>
+        <p class="text-xs text-base-content/60 mt-0.5">
+            Manage the content and regions for this blog post.
+        </p>
+    </div>
+    <button
+        type="button"
+        class="btn btn-circle btn-ghost btn-xs"
+        onclick="document.getElementById('post-modal').close()"
+        aria-label="Close"
+    >
+        ✕
+    </button>
+</div>
+
+<div class="divider my-3"></div>
 
 <form
     method="post"
     hx-post="{{ form_action|default:request.path }}"
     hx-target="#post-table"
     hx-swap="outerHTML"
+    class="space-y-4"
 >
     {% csrf_token %}
 
-    <div class="form-control mb-3">
+    <div class="form-control">
         <label class="label">
-            <span class="label-text">Caption</span>
+            <span class="label-text text-sm font-semibold">Caption</span>
         </label>
         {{ form.caption }}
         {% if form.caption.errors %}
@@ -27,9 +45,9 @@
         {% endif %}
     </div>
 
-    <div class="form-control mb-3">
+    <div class="form-control">
         <label class="label">
-            <span class="label-text">Description</span>
+            <span class="label-text text-sm font-semibold">Description</span>
         </label>
         {{ form.description }}
         {% if form.description.errors %}
@@ -37,11 +55,11 @@
         {% endif %}
     </div>
 
-    <div class="form-control mb-4">
+    <div class="form-control">
         <label class="label">
-            <span class="label-text">Regions</span>
+            <span class="label-text text-sm font-semibold">Regions</span>
         </label>
-        <div class="space-y-1">
+        <div class="bg-base-200/60 rounded-xl p-3 max-h-52 overflow-y-auto">
             {{ form.region }}
         </div>
         {% if form.region.errors %}
@@ -49,13 +67,14 @@
         {% endif %}
     </div>
 
-    <div class="flex items-center justify-between gap-2 mt-4">
-        <button type="submit" class="btn btn-primary btn-sm">
+    <div class="pt-2 flex items-center justify-end gap-2">
+        <button type="button" class="btn btn-ghost btn-sm rounded-full"
+                onclick="document.getElementById('post-modal').close()">
+            Cancel
+        </button>
+        <button type="submit" class="btn btn-primary btn-sm rounded-full">
             {% if post %}Update{% else %}Create{% endif %} Post
         </button>
-        <form method="dialog">
-            <button class="btn btn-ghost btn-sm">Cancel</button>
-        </form>
     </div>
 </form>
 

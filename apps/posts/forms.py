@@ -32,8 +32,10 @@ class PostForm(forms.ModelForm):
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
-        # Style region checkboxes with DaisyUI classes
-        self.fields["region"].widget.attrs.update(
-            {"class": "checkbox checkbox-sm checkbox-primary"}
-        )
+        # Container for checkbox list
+        region_widget = self.fields["region"].widget
+        existing_classes = region_widget.attrs.get("class", "")
+        region_widget.attrs["class"] = (
+            existing_classes + " grid grid-cols-2 gap-2 text-sm"
+        ).strip()
 

@@ -3,7 +3,23 @@
     <span>{{ error }}</span>
 </div>
 {% elif post %}
-<h3 class="font-semibold mb-1 text-base-content">{{ post.caption }}</h3>
+<div class="flex items-start justify-between mb-3 gap-3">
+    <div>
+        <h3 class="font-semibold mb-1 text-base-content text-base md:text-lg">{{ post.caption }}</h3>
+        <p class="text-xs text-base-content/60">
+            {{ post.created_at|date:"F j, Y, g:i a" }}
+        </p>
+    </div>
+    <button
+        type="button"
+        class="btn btn-circle btn-ghost btn-xs"
+        onclick="document.getElementById('post-modal').close()"
+        aria-label="Close"
+    >
+        ✕
+    </button>
+</div>
+
 <p class="text-xs text-base-content/60 mb-2">
     {{ post.created_at|date:"F j, Y, g:i a" }}
 </p>
@@ -18,7 +34,7 @@
 </div>
 {% endif %}
 
-<p class="text-sm text-base-content/80 whitespace-pre-line">
+<p class="text-sm text-base-content/80 whitespace-pre-line mt-1">
     {{ post.description }}
 </p>
 {% else %}

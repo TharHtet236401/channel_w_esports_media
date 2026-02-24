@@ -28,12 +28,12 @@
         </div>
     {% endif %}
 
-    <div class="card bg-base-100 shadow-lg border border-base-300/70">
+    <div class="card bg-base-100 shadow-lg border border-base-300/70 rounded-2xl">
         <div class="card-body p-4 md:p-6 space-y-4">
             <div class="flex items-center justify-between mb-4 gap-3">
-                <h2 class="card-title text-base md:text-lg">All Posts</h2>
+                <h2 class="card-title text-base md:text-lg font-bold">All Posts</h2>
                 <button
-                    class="btn btn-sm btn-primary"
+                    class="btn btn-sm btn-primary rounded-full gap-2 shadow-md"
                     hx-get="{% url 'post_admin_create' %}"
                     hx-target="#post-modal-content"
                     hx-swap="innerHTML"
@@ -51,7 +51,7 @@
 
     <!-- Modal for view / edit / create -->
     <dialog id="post-modal" class="modal">
-        <div class="modal-box max-w-2xl" id="post-modal-content">
+        <div class="modal-box max-w-2xl rounded-2xl" id="post-modal-content">
             <!-- HTMX loads form or detail here -->
         </div>
         <form method="dialog" class="modal-backdrop">
