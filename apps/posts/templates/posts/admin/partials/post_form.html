@@ -59,9 +59,12 @@
         <label class="label">
             <span class="label-text text-sm font-semibold">Regions</span>
         </label>
-        <div class="bg-base-200/60 rounded-xl p-3 max-h-52 overflow-y-auto">
-            {{ form.region }}
-        </div>
+        {{ form.region }}
+        <label class="label">
+            <span class="label-text-alt text-xs text-base-content/60">
+                Hold Ctrl (or Cmd on Mac) to select multiple regions.
+            </span>
+        </label>
         {% if form.region.errors %}
         <p class="text-error text-xs mt-1">{{ form.region.errors.0 }}</p>
         {% endif %}
