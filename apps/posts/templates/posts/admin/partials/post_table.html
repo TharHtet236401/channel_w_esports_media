@@ -1,61 +1,71 @@
 {% if posts %}
-<div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
+<div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
     {% for post in posts %}
-    <article class="card bg-base-100 shadow-md border border-base-300/50 rounded-2xl hover:shadow-xl hover:border-primary/40 transition-all duration-200">
-        <div class="card-body p-4 md:p-5 flex flex-col gap-3">
-            <div class="flex items-start justify-between gap-2">
+    <article
+        class="card bg-base-100 shadow-md border border-base-300/50 rounded-2xl hover:shadow-xl hover:border-primary/40 transition-all duration-200 cursor-pointer"
+        hx-get="{% url 'post_admin_detail' post.id %}"
+        hx-target="#post-modal-content"
+        hx-swap="innerHTML"
+        hx-on::after-request="document.getElementById('post-modal').showModal()"
+    >
+        <div class="card-body p-5 md:p-6 flex flex-col gap-4">
+            <div class="flex items-start justify-between gap-4">
                 <div>
-                    <h3 class="font-semibold text-sm md:text-base text-base-content line-clamp-2">
+                    <h3 class="font-semibold text-base md:text-lg text-base-content line-clamp-2">
                         {{ post.caption }}
                     </h3>
-                    <p class="text-[11px] text-base-content/60 mt-1">
+                    <p class="text-xs md:text-sm text-base-content/60 mt-1">
                         {{ post.created_at|date:"M j, Y, g:i a" }}
                     </p>
                 </div>
-                {% if post.region.all %}
-                <div class="flex flex-wrap gap-1 justify-end max-w-[9rem]">
-                    {% for region in post.region.all %}
-                    <span class="badge badge-primary badge-xs uppercase text-[9px] tracking-wide px-1.5 py-0.5">
-                        {{ region.name }}
-                    </span>
-                    {% endfor %}
+
+                <div class="flex items-start gap-3">
+                    {% if post.region.all %}
+                    <div class="hidden sm:flex flex-col items-end gap-1 max-w-[5rem]">
+                        {% for region in post.region.all %}
+                        <span class="badge badge-primary badge-xs uppercase text-[9px] tracking-wide px-2 py-0.5">
+                            {{ region.name }}
+                        </span>
+                        {% endfor %}
+                    </div>
+                    {% endif %}
+
+                    <!-- Dropdown menu -->
+                    <div class="dropdown dropdown-end" onclick="event.stopPropagation()">
+                        <label tabindex="0" class="btn btn-ghost btn-xs rounded-full px-2 min-h-0 h-8">
+                            ⋮
+                        </label>
+                        <ul tabindex="0" class="dropdown-content z-[1] menu menu-sm p-2 shadow bg-base-100 rounded-xl border border-base-300/60 mt-1 w-32">
+                            <li>
+                                <button
+                                    class="justify-between"
+                                    hx-get="{% url 'post_admin_update' post.id %}"
+                                    hx-target="#post-modal-content"
+                                    hx-swap="innerHTML"
+                                    hx-on::after-request="document.getElementById('post-modal').showModal()"
+                                >
+                                    Edit
+                                </button>
+                            </li>
+                            <li>
+                                <button
+                                    class="text-error"
+                                    hx-post="{% url 'post_admin_delete' post.id %}"
+                                    hx-target="#post-table"
+                                    hx-swap="outerHTML"
+                                    hx-confirm="Delete this post?"
+                                >
+                                    Delete
+                                </button>
+                            </li>
+                        </ul>
+                    </div>
                 </div>
-                {% endif %}
             </div>
 
             <p class="text-xs text-base-content/70 line-clamp-3">
                 {{ post.description|truncatewords:22 }}
             </p>
-
-            <div class="card-actions justify-end pt-1 gap-2">
-                <button
-                    class="btn btn-xs btn-ghost rounded-full"
-                    hx-get="{% url 'post_admin_detail' post.id %}"
-                    hx-target="#post-modal-content"
-                    hx-swap="innerHTML"
-                    hx-on::after-request="document.getElementById('post-modal').showModal()"
-                >
-                    View
-                </button>
-                <button
-                    class="btn btn-xs btn-outline btn-primary rounded-full"
-                    hx-get="{% url 'post_admin_update' post.id %}"
-                    hx-target="#post-modal-content"
-                    hx-swap="innerHTML"
-                    hx-on::after-request="document.getElementById('post-modal').showModal()"
-                >
-                    Edit
-                </button>
-                <button
-                    class="btn btn-xs btn-outline btn-error rounded-full"
-                    hx-post="{% url 'post_admin_delete' post.id %}"
-                    hx-target="#post-table"
-                    hx-swap="outerHTML"
-                    hx-confirm="Delete this post?"
-                >
-                    Delete
-                </button>
-            </div>
         </div>
     </article>
     {% endfor %}
